@@ -13,9 +13,9 @@ export default class IsometricRoomStage extends Stage {
 
 		this.on('setup', () => {
 			// Camera
-			this.experience?.camera.instance.position.set(4, 12, 12);
-			this.experience?.camera.instance.rotation.set(0, 0, 0);
-			this.experience?.camera.instance.lookAt(new THREE.Vector3(0, 0, 0));
+			this.engine?.camera.instance.position.set(4, 12, 12);
+			this.engine?.camera.instance.rotation.set(0, 0, 0);
+			this.engine?.camera.instance.lookAt(new THREE.Vector3(0, 0, 0));
 			// Setup
 			this.environment = new Environment();
 			this.room = new Room();

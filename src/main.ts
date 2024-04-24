@@ -1,6 +1,9 @@
 import './style.css';
-import { createExperience } from './core/Experience.js';
-import IsometricRoomStage from './stages/IsometricRoom/index.js';
+import { createEngine } from './core/Engine.js';
+import {
+	CarRadarStage,
+	// IsometricRoomStage,
+} from './stages';
 
-window.experience = createExperience(document.querySelector('.webgl') as HTMLCanvasElement);
-window.experience.createStage(new IsometricRoomStage());
+window.engine = createEngine(document.querySelector('.webgl') as HTMLCanvasElement);
+window.engine.createStage(new CarRadarStage());

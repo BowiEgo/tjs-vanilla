@@ -1,10 +1,10 @@
 import { Group, PerspectiveCamera, Scene } from 'three';
 import Sizes from './Sizes';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
-import { Experience, createExperience } from './Experience';
+import { Engine, createEngine } from './Engine';
 
 export default class Camera {
-	experience: Experience | null;
+	engine: Engine | null;
 	sizes: Sizes;
 	scene: Scene;
 	canvas: HTMLCanvasElement;
@@ -13,10 +13,10 @@ export default class Camera {
 	controls: OrbitControls;
 
 	constructor() {
-		this.experience = createExperience();
-		this.sizes = this.experience.sizes;
-		this.scene = this.experience.scene;
-		this.canvas = this.experience.canvas;
+		this.engine = createEngine();
+		this.sizes = this.engine.sizes;
+		this.scene = this.engine.scene;
+		this.canvas = this.engine.canvas;
 
 		this.instance = this.setInstance();
 		this.group = this.setCameraGroup();
@@ -52,8 +52,8 @@ export default class Camera {
 		this.instance.updateProjectionMatrix();
 	}
 
-	update() {
-		if (this.controls.enabled) {
+	animate() {
+		if (this.controls && this.controls.enabled) {
 			this.controls.update();
 		}
 	}

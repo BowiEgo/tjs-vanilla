@@ -1,7 +1,7 @@
 import { DRACOLoader, GLTF, GLTFLoader } from 'three/examples/jsm/Addons.js';
 import EventEmitter from './EventEmitter';
 import { CubeTexture, CubeTextureLoader, LoadingManager, Texture, TextureLoader } from 'three';
-import { Experience, createExperience } from './Experience';
+import { Engine, createEngine } from './Engine';
 
 type Loaders = {
 	gltfLoader: GLTFLoader;
@@ -23,7 +23,7 @@ const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('/assets/draco/gltf/');
 
 export default class Resources extends EventEmitter {
-	experience: Experience;
+	engine: Engine;
 	items: { [key: string]: File };
 	toLoad: number;
 	loaded: number;
@@ -33,7 +33,7 @@ export default class Resources extends EventEmitter {
 		super();
 
 		// Setup
-		this.experience = createExperience();
+		this.engine = createEngine();
 		this.items = {};
 		this.toLoad = 0;
 		this.loaded = 0;
@@ -43,15 +43,15 @@ export default class Resources extends EventEmitter {
 	setLoaders() {
 		const loaders = {} as Loaders;
 		loadingManager.onStart = () => {
-			// this.experience.intro?.init();
+			// this.engine.intro?.init();
 		};
 
 		loadingManager.onLoad = () => {
-			// this.experience.intro?.start();
+			// this.engine.intro?.start();
 		};
 
 		loadingManager.onProgress = (_itemUrl, itemsLoaded, itemsTotal) => {
-			// this.experience.intro?.update(itemsLoaded / itemsTotal);
+			// this.engine.intro?.update(itemsLoaded / itemsTotal);
 		};
 
 		loadingManager.onError = (err: string) => {

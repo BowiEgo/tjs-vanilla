@@ -11,11 +11,11 @@ export default [
 			'assets/textures/environmentMaps/0/nz.png',
 		],
 	},
-	// {
-	// 	name: 'bakedTexture',
-	// 	type: 'texture',
-	// 	path: 'assets/textures/baked/baked.jpg',
-	// },
+	{
+		name: 'bakedTexture',
+		type: 'texture',
+		path: 'assets/models/IsometricRoom/baked.jpg',
+	},
 	{
 		name: 'roomModel',
 		type: 'gltfModel',

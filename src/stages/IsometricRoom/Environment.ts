@@ -9,7 +9,7 @@ import {
 import Resources from '../../core/Resources';
 import Debug from '../../core/Debug';
 import GUI from 'lil-gui';
-import { Experience, createExperience } from '../../core/Experience';
+import { Engine, createEngine } from '../../core/Engine';
 
 type EnvironmentMap = {
 	intensity: number;
@@ -18,7 +18,7 @@ type EnvironmentMap = {
 };
 
 export default class Environment {
-	experience: Experience;
+	engine: Engine;
 	scene: Scene;
 	debug: Debug;
 	debugFolder: GUI | undefined;
@@ -27,10 +27,10 @@ export default class Environment {
 	environmentMap: EnvironmentMap;
 
 	constructor() {
-		this.experience = createExperience();
-		this.scene = this.experience.scene;
-		this.resources = this.experience.resources;
-		this.debug = this.experience.debug;
+		this.engine = createEngine();
+		this.scene = this.engine.scene;
+		this.resources = this.engine.resources;
+		this.debug = this.engine.debug;
 
 		// Debug
 		if (this.debug.active) {

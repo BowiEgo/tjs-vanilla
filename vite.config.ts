@@ -1,3 +1,5 @@
+import glsl from 'vite-plugin-glsl';
+
 export default {
 	base: './',
 	server: {
@@ -10,4 +12,5 @@ export default {
 			},
 		},
 	},
+	plugins: [glsl()],
 };

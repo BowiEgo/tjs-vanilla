@@ -1,5 +1,6 @@
 declare module '*.glsl';
+declare module 'screen-space-reflection';
 
 interface Window {
-	experience: Experience;
+	engine: Engine;
 }
