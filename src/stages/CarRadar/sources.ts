@@ -7,7 +7,7 @@ export default [
 	{
 		name: 'PorscheModel',
 		type: 'gltfModel',
-		path: 'assets/models/911/911-transformed.glb',
+		path: 'assets/models/911/Merged.glb',
 	},
 	{
 		name: 'AirflowMesh',

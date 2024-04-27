@@ -1,10 +1,10 @@
 import * as THREE from 'three';
-import Object from '../../core/Object';
+import { GLTF } from 'three/examples/jsm/Addons.js';
+import BaseObject from '../../core/Object/BaseObject';
 import vertex from '../../shaders/airflow.vert';
 import fragment from '../../shaders/airflow.frag';
-import { GLTF } from 'three/examples/jsm/Addons.js';
 
-export default class Airflow extends Object {
+export default class Airflow extends BaseObject {
 	target: THREE.WebGLRenderTarget | undefined;
 	postMesh: THREE.Mesh | THREE.Group;
 	perlinTexture: THREE.Texture;
@@ -46,7 +46,9 @@ export default class Airflow extends Object {
 			.max(20)
 			.step(1)
 			.onChange((val: number) => {
-				(this.material as THREE.ShaderMaterial).uniforms.u_linesPerGroup.value = val;
+				if (this.material && this.material instanceof THREE.ShaderMaterial) {
+					this.material.uniforms.u_linesPerGroup.value = val;
+				}
 			});
 
 		this.debugFolder
@@ -153,13 +155,11 @@ export default class Airflow extends Object {
 	setMesh(): void {
 		this.mesh = new THREE.Mesh(this.geometry, this.material);
 		this.mesh.position.y = 0.1;
-
-		this.scene.add(this.mesh);
 	}
 
-	beforeAnimate(): void {}
+	beforeUpdate(): void {}
 
-	animate(): void {
+	update(): void {
 		if (this.material instanceof THREE.ShaderMaterial) {
 			this.material.uniforms.u_time.value = this.time.elapsed;
 		}

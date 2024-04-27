@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import Object from '../../core/Object';
+import Object from '../../core/Object/BaseObject';
 import vertex from '../../shaders/RadarWave/vertex.glsl';
 import fragment from '../../shaders/RadarWave/fragment.glsl';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
@@ -284,7 +284,7 @@ export default class RadarWave extends Object {
 		this.scene.add(this.mesh);
 	}
 
-	beforeAnimate(): void {
+	beforeUpdate(): void {
 		if (this.target) {
 			this.renderer.setRenderTarget(this.target);
 		}
@@ -297,7 +297,7 @@ export default class RadarWave extends Object {
 		}
 	}
 
-	animate(): void {
+	update(): void {
 		if (this.material instanceof THREE.ShaderMaterial) {
 			this.material.uniforms.uTime.value = this.time.elapsed;
 			this.material.uniforms.uMouse.value.set(

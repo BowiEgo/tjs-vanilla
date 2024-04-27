@@ -2,13 +2,13 @@ import { Scene } from 'three';
 import EventEmitter from '../core/EventEmitter';
 import { Engine, createEngine } from '../core/Engine';
 import Resources from '../core/Resources';
-import Object from '../core/Object';
+import BaseObject from '../core/Object/BaseObject';
 
 export default class Stage extends EventEmitter {
 	engine: Engine | null;
 	scene: Scene;
 	resources: Resources;
-	objects: Object[];
+	objects: BaseObject[];
 
 	constructor() {
 		super();
@@ -22,9 +22,9 @@ export default class Stage extends EventEmitter {
 			this.trigger('setup');
 		});
 
-		this.on('animate', () => {
+		this.on('update', () => {
 			this.objects.forEach((object) => {
-				object.animate();
+				object.update();
 			});
 		});
 
@@ -35,12 +35,15 @@ export default class Stage extends EventEmitter {
 		});
 	}
 
-	addObject(object: Object) {
+	addObject(object: BaseObject) {
 		this.objects.push(object);
+		if (object.mesh) {
+			this.scene.add(object.mesh);
+		}
 	}
 
-	animate() {
-		this.trigger('animate');
+	update() {
+		this.trigger('update');
 	}
 
 	destroy() {

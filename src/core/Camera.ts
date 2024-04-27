@@ -24,7 +24,7 @@ export default class Camera {
 	}
 
 	setInstance() {
-		const instance = new PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 100);
+		const instance = new PerspectiveCamera(35, this.sizes.width / this.sizes.height, 1, 200);
 		instance.position.set(6, 4, 8);
 		this.scene.add(instance);
 		this.instance = instance;
@@ -52,7 +52,7 @@ export default class Camera {
 		this.instance.updateProjectionMatrix();
 	}
 
-	animate() {
+	update() {
 		if (this.controls && this.controls.enabled) {
 			this.controls.update();
 		}

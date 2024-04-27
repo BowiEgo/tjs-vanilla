@@ -58,7 +58,7 @@ export default class Effect {
 		this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2));
 	}
 
-	animate() {
+	update() {
 		this.instance.render();
 	}
 

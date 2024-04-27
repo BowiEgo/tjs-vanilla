@@ -1,31 +1,26 @@
-import * as THREE from 'three';
+// import * as THREE from 'three';
 import { GLTF } from 'three/examples/jsm/Addons.js';
-import Object from '../../core/Object';
+import BaseObject from '../../core/Object/BaseObject';
+import ClippedEdges from '../../core/Object/ClippedEdges';
 
-export default class Car extends Object {
+export default class Car extends BaseObject {
+	clippedEdges: ClippedEdges;
+
 	constructor() {
 		super();
-		// Setup
 
 		this.setMesh();
+		this.clippedEdges = new ClippedEdges(this);
 	}
-
+	setMaterial() {}
 	setMesh() {
 		const model = (this.resources.items.PorscheModel as GLTF).scene;
-
-		this.scene.add(model);
-
-		model.traverse((child) => {
-			if (child instanceof THREE.Mesh) {
-				child.castShadow = true;
-				child.material = new THREE.MeshBasicMaterial({
-					color: 'rgb(37, 166, 241)',
-				});
-			}
-		});
-
 		this.mesh = model;
-
-		return model;
+	}
+	update(): void {
+		this.clippedEdges?.update();
+	}
+	destroyed(): void {
+		this.clippedEdges?.destroy();
 	}
 }

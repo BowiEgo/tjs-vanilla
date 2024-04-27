@@ -28,7 +28,7 @@ export type Engine = {
 	destroyStage: () => void;
 	destroyObjects: () => void;
 	resize: () => void;
-	animate: () => void;
+	update: () => void;
 	destroy: () => void;
 };
 
@@ -76,11 +76,11 @@ export function createEngine(canvas?: HTMLCanvasElement | null): Engine {
 		engine.renderer.resize();
 		engine.effect.resize();
 	};
-	engine.animate = () => {
-		engine.camera.animate();
-		engine.stage?.animate();
-		engine.effect.animate();
-		engine.effect.instance.passes.length === 0 && engine.renderer.animate();
+	engine.update = () => {
+		engine.camera.update();
+		engine.stage?.update();
+		engine.effect.update();
+		engine.effect.instance.passes.length === 0 && engine.renderer.update();
 	};
 	engine.destroy = () => {
 		engine.sizes.off('resize');
@@ -105,7 +105,7 @@ export function createEngine(canvas?: HTMLCanvasElement | null): Engine {
 
 	// Time tick event
 	engine.time.on('tick', () => {
-		engine.animate();
+		engine.update();
 	});
 
 	return engine;

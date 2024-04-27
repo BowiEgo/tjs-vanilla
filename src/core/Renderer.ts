@@ -47,15 +47,15 @@ export default class Renderer extends EventEmitter {
 		this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2));
 	}
 
-	animate() {
-		this.trigger('beforeAnimate');
+	update() {
+		this.trigger('beforeUpdate');
 		this.instance.render(this.scene, this.camera.instance);
-		this.trigger('afterAnimate');
+		this.trigger('afterUpdate');
 	}
 
 	destroy() {
-		this.off('beforeAnimate');
-		this.off('afterAnimate');
+		this.off('beforeUpdate');
+		this.off('afterUpdate');
 		this.instance.dispose();
 	}
 }
